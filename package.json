@@ -1,4 +1,7 @@
 {
+  "name": "gwislab_strapi_template",
+  "version": "0.1.0",
+  "private": true,
   "devDependencies": {
     "husky": "^9.1.6"
   },

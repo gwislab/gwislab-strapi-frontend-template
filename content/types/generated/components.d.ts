@@ -1,17 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface PagesMap extends Struct.ComponentSchema {
-  collectionName: 'components_pages_maps';
-  info: {
-    displayName: 'Map';
-    description: '';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    description: Schema.Attribute.String;
-  };
-}
-
 export interface ComponentsTitle extends Struct.ComponentSchema {
   collectionName: 'components_components_title';
   info: {
@@ -87,16 +75,28 @@ export interface ComponentsFooter extends Struct.ComponentSchema {
   };
 }
 
+export interface PagesMap extends Struct.ComponentSchema {
+  collectionName: 'components_pages_maps';
+  info: {
+    displayName: 'Map';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    description: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'pages.map': PagesMap;
       'components.title': ComponentsTitle;
       'components.meta-tag': ComponentsMetaTag;
       'components.meta-data': ComponentsMetaData;
       'components.link': ComponentsLink;
       'components.header': ComponentsHeader;
       'components.footer': ComponentsFooter;
+      'pages.map': PagesMap;
     }
   }
 }
