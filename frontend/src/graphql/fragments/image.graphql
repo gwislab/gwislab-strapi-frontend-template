@@ -1,0 +1,15 @@
+fragment ImageFragment on UploadFile {
+  alternativeText
+  caption
+  documentId
+  ext
+  height
+  locale
+  mime
+  name
+  previewUrl
+  provider
+  size
+  url
+  width
+}

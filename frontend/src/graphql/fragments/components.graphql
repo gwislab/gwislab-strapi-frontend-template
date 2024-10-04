@@ -1,0 +1,17 @@
+fragment LinkFragment on ComponentComponentsLink {
+  id
+  label
+  link
+  isExternal
+}
+
+fragment TitleFragment on ComponentComponentsTitle {
+  id
+  label
+  link
+  isButton
+  isExternal
+  subTitles {
+    ...LinkFragment
+  }
+}

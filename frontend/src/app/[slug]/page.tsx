@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import { RenderPageComponents } from "~/components/pages";
 import { getPageComponents } from "~/lib/apollo-server-fetch";
 
@@ -7,11 +9,20 @@ export const metadata = {
     default: "VZZ Brokerage",
     template: "%s | VZZ Brokerage"
   },
-  description: "Let us help you achieve your real estate goals today."
+  description: "This is a description"
 };
 
-const Home = async () => {
-  const result = await getPageComponents();
+interface PageProps {
+  params: { slug: string };
+}
+
+const Pages = async ({ params }: PageProps) => {
+  const slug = params.slug;
+  if (!slug) {
+    // if slug is empty load Home page
+    redirect("/");
+  }
+  const result = await getPageComponents(slug);
 
   return (
     <main>
@@ -20,4 +31,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default Pages;

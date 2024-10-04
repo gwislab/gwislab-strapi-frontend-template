@@ -1,0 +1,16 @@
+fragment MapSection on ComponentPagesMap {
+  id
+  title
+  description
+}
+
+fragment ErrorSection on Error {
+  code
+  message
+}
+
+fragment DynamicZoneContent on PageContentDynamicZone {
+  __typename
+  ...MapSection
+  ...ErrorSection
+}

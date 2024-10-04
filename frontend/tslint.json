@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "no-empty": false,
+    "jsx-no-lambda": false,
+    "no-console": [true, "debug", "time", "timeEnd", "trace"],
+    "no-shadowed-variable": false,
+    "no-empty-interface": false
+  },
+  "linterOptions": {
+    "exclude": [
+      ".next/**/*.ts",
+      "node_modules/**/*.ts",
+      ".next/**/*.tsx",
+      "node_modules/**/*.tsx"
+    ]
+  }
+}

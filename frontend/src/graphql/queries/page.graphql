@@ -1,0 +1,20 @@
+query GetPages($slug: String) {
+  pages(filters: { metaData: { slug: { eq: $slug } } }) {
+    metaData {
+      id
+      title
+      description
+      metaTags {
+        id
+        name
+        content
+      }
+      slug
+    }
+    content {
+      ...DynamicZoneContent
+    }
+    locale
+    documentId
+  }
+}

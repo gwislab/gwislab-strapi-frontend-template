@@ -1,0 +1,21 @@
+fragment HeaderFragment on ComponentComponentsHeader {
+  id
+  logo {
+    ...ImageFragment
+  }
+  titles {
+    ...TitleFragment
+  }
+}
+
+fragment FooterFragment on ComponentComponentsFooter {
+  id
+  appName
+  copyRightText
+  logo {
+    ...ImageFragment
+  }
+  links {
+    ...LinkFragment
+  }
+}

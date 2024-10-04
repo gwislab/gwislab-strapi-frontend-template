@@ -1,0 +1,15 @@
+query GetHeaderFooter {
+  headerFooter {
+    documentId
+    header {
+      ...HeaderFragment
+    }
+    footer {
+      ...FooterFragment
+    }
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+  }
+}
