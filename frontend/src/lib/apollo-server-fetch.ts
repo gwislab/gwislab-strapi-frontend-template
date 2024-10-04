@@ -22,8 +22,8 @@ export const fetchWithAxios = async ({ query, variables }: IFetchWithAxios) => {
     });
 
     return response.data.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  } catch (error: any) {
+    console.error("Error fetching data:", error.message);
     throw error;
   }
 };

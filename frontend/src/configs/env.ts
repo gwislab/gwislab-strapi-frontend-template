@@ -9,11 +9,11 @@ const getDomainUrl = () => {
 };
 
 export const APP_ENV = {
-  APP_NAME: "VZZ Brokerage",
+  APP_NAME: "Gwislab Template",
+  APP_DEFAULT_DESCRIPTION: "This is a gwislab template",
   DEFAULT_THEME: "light",
   BACKEND_BASE: getDomainUrl(),
   BACKEND_URL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
   FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
-  // APP_EMAIL: "verlasellshomes@gmail.com",
   APP_EMAIL: "cliffordteng5@gmail.com"
 };

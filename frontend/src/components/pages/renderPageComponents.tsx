@@ -3,6 +3,7 @@
 import React from "react";
 
 import ErrorContent from "../error-content";
+import MapSection from "./sections/map";
 import { DynamicZoneContentFragment } from "~/graphql/generated/schema";
 
 interface IRenderRightSectionFromContentProps {
@@ -13,8 +14,8 @@ const RenderRightSectionFromContent = ({
   content
 }: IRenderRightSectionFromContentProps) => {
   switch (content.__typename) {
-    // case "ComponentPagesMap":
-    //   return <MapSection />;
+    case "ComponentPagesMap":
+      return <MapSection />;
 
     default:
       return <ErrorContent title="404" description="This page is not found" />;

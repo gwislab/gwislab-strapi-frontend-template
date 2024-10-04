@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { GraphqlClient } from "~/components/clients";
+import { APP_ENV } from "~/configs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,12 +11,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://vzzbrokerage.com"),
+  metadataBase: new URL(APP_ENV.FRONTEND_URL!),
   title: {
-    default: "VZZ Brokerage",
-    template: "%s | VZZ Brokerage"
+    default: APP_ENV.APP_NAME,
+    template: `%s | ${APP_ENV.APP_NAME}`
   },
-  description: "Let us help you achieve your real estate goals today."
+  description: APP_ENV.APP_DEFAULT_DESCRIPTION
 };
 
 export default function RootLayout({

@@ -1,13 +1,14 @@
 import { RenderPageComponents } from "~/components/pages";
+import { APP_ENV } from "~/configs";
 import { getPageComponents } from "~/lib/apollo-server-fetch";
 
 export const metadata = {
-  metadataBase: new URL("http://vzzbrokerage.com"),
+  metadataBase: new URL(APP_ENV.FRONTEND_URL!),
   title: {
-    default: "VZZ Brokerage",
-    template: "%s | VZZ Brokerage"
+    default: APP_ENV.APP_NAME,
+    template: `%s | ${APP_ENV.APP_NAME}`
   },
-  description: "Let us help you achieve your real estate goals today."
+  description: APP_ENV.APP_DEFAULT_DESCRIPTION
 };
 
 const Home = async () => {
