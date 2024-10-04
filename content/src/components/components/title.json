@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_components_title",
+  "info": {
+    "displayName": "Title",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "isButton": {
+      "type": "boolean",
+      "default": false
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "subTitles": {
+      "displayName": "Link",
+      "type": "component",
+      "repeatable": true,
+      "component": "components.link"
+    }
+  }
+}
