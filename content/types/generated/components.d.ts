@@ -1,5 +1,17 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface PagesMap extends Struct.ComponentSchema {
+  collectionName: 'components_pages_maps';
+  info: {
+    displayName: 'Map';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    description: Schema.Attribute.String;
+  };
+}
+
 export interface ComponentsTitle extends Struct.ComponentSchema {
   collectionName: 'components_components_title';
   info: {
@@ -12,6 +24,7 @@ export interface ComponentsTitle extends Struct.ComponentSchema {
     isButton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     subTitles: Schema.Attribute.Component<'components.link', true>;
+    isLang: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -55,6 +68,7 @@ export interface ComponentsHeader extends Struct.ComponentSchema {
   collectionName: 'components_components_headers';
   info: {
     displayName: 'Header';
+    description: '';
   };
   attributes: {
     logo: Schema.Attribute.Media<'images'>;
@@ -75,28 +89,16 @@ export interface ComponentsFooter extends Struct.ComponentSchema {
   };
 }
 
-export interface PagesMap extends Struct.ComponentSchema {
-  collectionName: 'components_pages_maps';
-  info: {
-    displayName: 'Map';
-    description: '';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    description: Schema.Attribute.String;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'pages.map': PagesMap;
       'components.title': ComponentsTitle;
       'components.meta-tag': ComponentsMetaTag;
       'components.meta-data': ComponentsMetaData;
       'components.link': ComponentsLink;
       'components.header': ComponentsHeader;
       'components.footer': ComponentsFooter;
-      'pages.map': PagesMap;
     }
   }
 }
