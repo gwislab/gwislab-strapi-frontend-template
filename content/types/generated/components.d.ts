@@ -56,11 +56,13 @@ export interface ComponentsLink extends Struct.ComponentSchema {
   collectionName: 'components_components_links';
   info: {
     displayName: 'Link';
+    description: '';
   };
   attributes: {
     label: Schema.Attribute.String;
     link: Schema.Attribute.String;
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isButton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
