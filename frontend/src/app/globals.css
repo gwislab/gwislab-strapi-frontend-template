@@ -109,3 +109,7 @@
 li {
   margin-bottom: 0.5rem;
 }
+
+button:focus-visible {
+  outline: none;
+}

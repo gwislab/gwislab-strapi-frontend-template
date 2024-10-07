@@ -16,8 +16,13 @@ const useGetLocalParams = () => {
     window.location.href = url.toString();
   };
 
+  const getLink = ({ link }: { link?: string }) => {
+    return lang ? `/${link}?lang=${lang}` : `/${link}`;
+  };
+
   return {
     locale: lang || "en",
+    getLink,
     appRouter
   };
 };

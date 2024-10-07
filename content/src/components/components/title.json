@@ -29,6 +29,10 @@
     "isLang": {
       "type": "boolean",
       "default": false
+    },
+    "isPrimary": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

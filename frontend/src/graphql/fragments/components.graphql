@@ -2,7 +2,9 @@ fragment LinkFragment on ComponentComponentsLink {
   id
   label
   link
+  isButton
   isExternal
+  isPrimary
 }
 
 fragment TitleFragment on ComponentComponentsTitle {
@@ -11,6 +13,7 @@ fragment TitleFragment on ComponentComponentsTitle {
   link
   isButton
   isExternal
+  isPrimary
   isLang
   subTitles {
     ...LinkFragment

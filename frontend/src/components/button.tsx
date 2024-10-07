@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Text from "./text";
 import { Button } from "./ui/button";
 import { LinkFragmentFragment } from "~/graphql/generated/schema";
+import { cn } from "~/lib/utils";
 
 interface ButtonProps extends Partial<LinkFragmentFragment> {
   text?: string | Maybe<string>;
@@ -34,7 +35,13 @@ const AppButton = ({
   const router = useRouter();
   return (
     <Button
-      className={`border h-14 border-white flex justify-center hover:bg-black items-center gap-2 ${className}`}
+      className={cn(
+        "border h-14 border-white flex justify-center hover:bg-black items-center gap-2",
+        className,
+        props.isPrimary
+          ? "bg-primary text-white"
+          : "bg-white text-black border-primary hover:bg-primary hover:text-white"
+      )}
       onClick={
         onClick
           ? onClick

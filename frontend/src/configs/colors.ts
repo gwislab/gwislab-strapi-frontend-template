@@ -6,7 +6,7 @@ const Colors = {
   pure: "#fff",
   normal: "#212529",
   broken: "#F2F2F2",
-  primary: "#0E2145",
+  primary: "#00427F",
   transparent: "transparent"
 };
 

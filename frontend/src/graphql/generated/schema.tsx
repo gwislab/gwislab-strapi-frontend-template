@@ -104,14 +104,18 @@ export type ComponentComponentsHeaderInput = {
 export type ComponentComponentsLink = {
   __typename?: "ComponentComponentsLink";
   id: Scalars["ID"]["output"];
+  isButton?: Maybe<Scalars["Boolean"]["output"]>;
   isExternal?: Maybe<Scalars["Boolean"]["output"]>;
+  isPrimary?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Scalars["String"]["output"]>;
   link?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type ComponentComponentsLinkFiltersInput = {
   and?: InputMaybe<InputMaybe<ComponentComponentsLinkFiltersInput>[]>;
+  isButton?: InputMaybe<BooleanFilterInput>;
   isExternal?: InputMaybe<BooleanFilterInput>;
+  isPrimary?: InputMaybe<BooleanFilterInput>;
   label?: InputMaybe<StringFilterInput>;
   link?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ComponentComponentsLinkFiltersInput>;
@@ -120,7 +124,9 @@ export type ComponentComponentsLinkFiltersInput = {
 
 export type ComponentComponentsLinkInput = {
   id?: InputMaybe<Scalars["ID"]["input"]>;
+  isButton?: InputMaybe<Scalars["Boolean"]["input"]>;
   isExternal?: InputMaybe<Scalars["Boolean"]["input"]>;
+  isPrimary?: InputMaybe<Scalars["Boolean"]["input"]>;
   label?: InputMaybe<Scalars["String"]["input"]>;
   link?: InputMaybe<Scalars["String"]["input"]>;
 };
@@ -185,6 +191,7 @@ export type ComponentComponentsTitle = {
   isButton?: Maybe<Scalars["Boolean"]["output"]>;
   isExternal?: Maybe<Scalars["Boolean"]["output"]>;
   isLang?: Maybe<Scalars["Boolean"]["output"]>;
+  isPrimary?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Scalars["String"]["output"]>;
   link?: Maybe<Scalars["String"]["output"]>;
   subTitles?: Maybe<Maybe<ComponentComponentsLink>[]>;
@@ -201,6 +208,7 @@ export type ComponentComponentsTitleFiltersInput = {
   isButton?: InputMaybe<BooleanFilterInput>;
   isExternal?: InputMaybe<BooleanFilterInput>;
   isLang?: InputMaybe<BooleanFilterInput>;
+  isPrimary?: InputMaybe<BooleanFilterInput>;
   label?: InputMaybe<StringFilterInput>;
   link?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ComponentComponentsTitleFiltersInput>;
@@ -213,6 +221,7 @@ export type ComponentComponentsTitleInput = {
   isButton?: InputMaybe<Scalars["Boolean"]["input"]>;
   isExternal?: InputMaybe<Scalars["Boolean"]["input"]>;
   isLang?: InputMaybe<Scalars["Boolean"]["input"]>;
+  isPrimary?: InputMaybe<Scalars["Boolean"]["input"]>;
   label?: InputMaybe<Scalars["String"]["input"]>;
   link?: InputMaybe<Scalars["String"]["input"]>;
   subTitles?: InputMaybe<InputMaybe<ComponentComponentsLinkInput>[]>;
@@ -507,7 +516,6 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreatePageArgs = {
   data: PageInput;
-  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -535,7 +543,6 @@ export type MutationDeleteHeaderFooterArgs = {
 
 export type MutationDeletePageArgs = {
   documentId: Scalars["ID"]["input"];
-  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
 };
 
 export type MutationDeleteReviewWorkflowsWorkflowArgs = {
@@ -589,7 +596,6 @@ export type MutationUpdateHeaderFooterArgs = {
 export type MutationUpdatePageArgs = {
   data: PageInput;
   documentId: Scalars["ID"]["input"];
-  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -668,6 +674,7 @@ export type PageFiltersInput = {
 
 export type PageInput = {
   content?: InputMaybe<Scalars["PageContentDynamicZoneInput"]["input"][]>;
+  locale?: InputMaybe<Scalars["String"]["input"]>;
   metaData?: InputMaybe<ComponentComponentsMetaDataInput>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
@@ -750,13 +757,11 @@ export type QueryI18NLocales_ConnectionArgs = {
 
 export type QueryPageArgs = {
   documentId: Scalars["ID"]["input"];
-  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
 
 export type QueryPagesArgs = {
   filters?: InputMaybe<PageFiltersInput>;
-  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<InputMaybe<Scalars["String"]["input"]>[]>;
   status?: InputMaybe<PublicationStatus>;
@@ -764,7 +769,6 @@ export type QueryPagesArgs = {
 
 export type QueryPages_ConnectionArgs = {
   filters?: InputMaybe<PageFiltersInput>;
-  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<InputMaybe<Scalars["String"]["input"]>[]>;
   status?: InputMaybe<PublicationStatus>;
@@ -1376,7 +1380,9 @@ export type LinkFragmentFragment = {
   id: string;
   label?: string | null;
   link?: string | null;
+  isButton?: boolean | null;
   isExternal?: boolean | null;
+  isPrimary?: boolean | null;
 };
 
 export type TitleFragmentFragment = {
@@ -1386,13 +1392,16 @@ export type TitleFragmentFragment = {
   link?: string | null;
   isButton?: boolean | null;
   isExternal?: boolean | null;
+  isPrimary?: boolean | null;
   isLang?: boolean | null;
   subTitles?: ({
     __typename?: "ComponentComponentsLink";
     id: string;
     label?: string | null;
     link?: string | null;
+    isButton?: boolean | null;
     isExternal?: boolean | null;
+    isPrimary?: boolean | null;
   } | null)[] | null;
 };
 
@@ -1422,13 +1431,16 @@ export type HeaderFragmentFragment = {
     link?: string | null;
     isButton?: boolean | null;
     isExternal?: boolean | null;
+    isPrimary?: boolean | null;
     isLang?: boolean | null;
     subTitles?: ({
       __typename?: "ComponentComponentsLink";
       id: string;
       label?: string | null;
       link?: string | null;
+      isButton?: boolean | null;
       isExternal?: boolean | null;
+      isPrimary?: boolean | null;
     } | null)[] | null;
   } | null)[] | null;
 };
@@ -1459,7 +1471,9 @@ export type FooterFragmentFragment = {
     id: string;
     label?: string | null;
     link?: string | null;
+    isButton?: boolean | null;
     isExternal?: boolean | null;
+    isPrimary?: boolean | null;
   } | null)[] | null;
 };
 
@@ -1549,13 +1563,16 @@ export type GetHeaderFooterQuery = {
         link?: string | null;
         isButton?: boolean | null;
         isExternal?: boolean | null;
+        isPrimary?: boolean | null;
         isLang?: boolean | null;
         subTitles?: ({
           __typename?: "ComponentComponentsLink";
           id: string;
           label?: string | null;
           link?: string | null;
+          isButton?: boolean | null;
           isExternal?: boolean | null;
+          isPrimary?: boolean | null;
         } | null)[] | null;
       } | null)[] | null;
     } | null;
@@ -1585,7 +1602,9 @@ export type GetHeaderFooterQuery = {
         id: string;
         label?: string | null;
         link?: string | null;
+        isButton?: boolean | null;
         isExternal?: boolean | null;
+        isPrimary?: boolean | null;
       } | null)[] | null;
     } | null;
   } | null;
@@ -1647,7 +1666,9 @@ export const LinkFragmentFragmentDoc = gql`
     id
     label
     link
+    isButton
     isExternal
+    isPrimary
   }
 `;
 export const TitleFragmentFragmentDoc = gql`
@@ -1657,6 +1678,7 @@ export const TitleFragmentFragmentDoc = gql`
     link
     isButton
     isExternal
+    isPrimary
     isLang
     subTitles {
       ...LinkFragment

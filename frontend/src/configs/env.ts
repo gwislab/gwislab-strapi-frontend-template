@@ -9,8 +9,8 @@ const getDomainUrl = () => {
 };
 
 export const APP_ENV = {
-  APP_NAME: "Gwislab Template",
-  APP_DEFAULT_DESCRIPTION: "This is a gwislab template",
+  APP_NAME: "Nordic PPM Group",
+  APP_DEFAULT_DESCRIPTION: "Transforming Project Concepts into Opportunities",
   DEFAULT_THEME: "light",
   BACKEND_BASE: getDomainUrl(),
   BACKEND_URL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,

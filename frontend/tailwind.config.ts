@@ -10,6 +10,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        text: "'Alata', sans-serif",
+        title: "'Alata', serif"
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -22,11 +26,11 @@ const config: Config = {
           foreground: "hsl(var(--popover-foreground))"
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#00427F",
           foreground: "hsl(var(--primary-foreground))"
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "#00427F",
           foreground: "hsl(var(--secondary-foreground))"
         },
         muted: {

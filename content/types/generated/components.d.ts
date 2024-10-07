@@ -25,6 +25,7 @@ export interface ComponentsTitle extends Struct.ComponentSchema {
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     subTitles: Schema.Attribute.Component<'components.link', true>;
     isLang: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isPrimary: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -63,6 +64,7 @@ export interface ComponentsLink extends Struct.ComponentSchema {
     link: Schema.Attribute.String;
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isButton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isPrimary: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
