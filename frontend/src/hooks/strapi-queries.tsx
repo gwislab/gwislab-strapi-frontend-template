@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 
+import useGetLocalParams from "./get-locale";
 import useReactiveVariables from "./reactive-variable";
 import { useGetHeaderFooterLazyQuery } from "~/graphql/generated/schema";
 import { extractAssetUrl } from "~/lib/utils";
@@ -7,10 +8,13 @@ import { extractAssetUrl } from "~/lib/utils";
 export const useGetHeaderFooterContent = () => {
   const { setVariables } = useReactiveVariables();
   const [getHeaderInfo, { data, loading }] = useGetHeaderFooterLazyQuery();
+  const { locale } = useGetLocalParams();
 
-  const initializeQuery = useCallback(async () => {
+  const initializeQuery = useCallback(async (lang: string) => {
     try {
-      const { data: info } = await getHeaderInfo();
+      const { data: info } = await getHeaderInfo({
+        variables: { locale: lang }
+      });
 
       setVariables({
         logoUrl: extractAssetUrl(info?.headerFooter?.header?.logo)
@@ -24,9 +28,9 @@ export const useGetHeaderFooterContent = () => {
   }, []);
 
   useEffect(() => {
-    initializeQuery();
+    initializeQuery(locale);
     return () => {};
-  }, []);
+  }, [locale]);
 
   return {
     header: data?.headerFooter?.header,

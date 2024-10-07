@@ -11,6 +11,7 @@ fragment TitleFragment on ComponentComponentsTitle {
   link
   isButton
   isExternal
+  isLang
   subTitles {
     ...LinkFragment
   }

@@ -1,5 +1,5 @@
-query GetHeaderFooter {
-  headerFooter {
+query GetHeaderFooter($locale: I18NLocaleCode) {
+  headerFooter(locale: $locale) {
     documentId
     header {
       ...HeaderFragment

@@ -16,9 +16,18 @@ import AppImage from "./image";
 import SectionContainer from "./section-container";
 import Text from "./text";
 import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu";
 import { SheetTrigger, SheetContent, Sheet } from "~/components/ui/sheet";
 import { ComponentComponentsTitle } from "~/graphql/generated/schema";
 import { useGetHeaderFooterContent } from "~/hooks";
+import useGetLocalParams from "~/hooks/get-locale";
 import { extractAssetUrl } from "~/lib/utils";
 
 const MenuIcon = (props: any) => {
@@ -129,6 +138,7 @@ group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 tex
 const Header = () => {
   const router = useRouter();
   const { header, loading } = useGetHeaderFooterContent();
+  const { appRouter, locale } = useGetLocalParams();
 
   return (
     <SectionContainer loading={loading} header={true}>
@@ -141,7 +151,27 @@ const Header = () => {
               </Link>
               <div className="ml-auto hidden lg:flex gap-2 z-[500000]">
                 {header?.titles?.map((title) =>
-                  !title?.isButton ? (
+                  title?.isLang ? (
+                    <DropdownMenu key={title?.label}>
+                      <DropdownMenuTrigger>
+                        <Text text={locale} className="text-white" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>
+                          <Text text={title?.label} />
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => appRouter({ locale: "en" })}>
+                          {" "}
+                          <Text text="EN" />
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => appRouter({ locale: "fr" })}>
+                          {" "}
+                          <Text text="FR" />
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : !title?.isButton ? (
                     <MenuItem
                       key={title?.label}
                       {...(title as ComponentComponentsTitle)}

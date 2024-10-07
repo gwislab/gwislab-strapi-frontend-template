@@ -14,9 +14,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
 export type MakeEmpty<
   T extends { [key: string]: unknown },
   K extends keyof T,
-> = {
-  [_ in K]?: never;
-};
+> = { [_ in K]?: never };
 export type Incremental<T> =
   | T
   | {
@@ -186,6 +184,7 @@ export type ComponentComponentsTitle = {
   id: Scalars["ID"]["output"];
   isButton?: Maybe<Scalars["Boolean"]["output"]>;
   isExternal?: Maybe<Scalars["Boolean"]["output"]>;
+  isLang?: Maybe<Scalars["Boolean"]["output"]>;
   label?: Maybe<Scalars["String"]["output"]>;
   link?: Maybe<Scalars["String"]["output"]>;
   subTitles?: Maybe<Maybe<ComponentComponentsLink>[]>;
@@ -201,6 +200,7 @@ export type ComponentComponentsTitleFiltersInput = {
   and?: InputMaybe<InputMaybe<ComponentComponentsTitleFiltersInput>[]>;
   isButton?: InputMaybe<BooleanFilterInput>;
   isExternal?: InputMaybe<BooleanFilterInput>;
+  isLang?: InputMaybe<BooleanFilterInput>;
   label?: InputMaybe<StringFilterInput>;
   link?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<ComponentComponentsTitleFiltersInput>;
@@ -212,6 +212,7 @@ export type ComponentComponentsTitleInput = {
   id?: InputMaybe<Scalars["ID"]["input"]>;
   isButton?: InputMaybe<Scalars["Boolean"]["input"]>;
   isExternal?: InputMaybe<Scalars["Boolean"]["input"]>;
+  isLang?: InputMaybe<Scalars["Boolean"]["input"]>;
   label?: InputMaybe<Scalars["String"]["input"]>;
   link?: InputMaybe<Scalars["String"]["input"]>;
   subTitles?: InputMaybe<InputMaybe<ComponentComponentsLinkInput>[]>;
@@ -325,7 +326,6 @@ export type HeaderFooter = {
 export type HeaderFooterInput = {
   footer?: InputMaybe<ComponentComponentsFooterInput>;
   header?: InputMaybe<ComponentComponentsHeaderInput>;
-  locale?: InputMaybe<Scalars["String"]["input"]>;
   publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
 };
 
@@ -529,6 +529,10 @@ export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
 };
 
+export type MutationDeleteHeaderFooterArgs = {
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
+};
+
 export type MutationDeletePageArgs = {
   documentId: Scalars["ID"]["input"];
   locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
@@ -578,6 +582,7 @@ export type MutationResetPasswordArgs = {
 
 export type MutationUpdateHeaderFooterArgs = {
   data: HeaderFooterInput;
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -720,6 +725,7 @@ export type Query = {
 };
 
 export type QueryHeaderFooterArgs = {
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1380,15 +1386,14 @@ export type TitleFragmentFragment = {
   link?: string | null;
   isButton?: boolean | null;
   isExternal?: boolean | null;
-  subTitles?:
-    | ({
-        __typename?: "ComponentComponentsLink";
-        id: string;
-        label?: string | null;
-        link?: string | null;
-        isExternal?: boolean | null;
-      } | null)[]
-    | null;
+  isLang?: boolean | null;
+  subTitles?: ({
+    __typename?: "ComponentComponentsLink";
+    id: string;
+    label?: string | null;
+    link?: string | null;
+    isExternal?: boolean | null;
+  } | null)[] | null;
 };
 
 export type HeaderFragmentFragment = {
@@ -1410,25 +1415,22 @@ export type HeaderFragmentFragment = {
     url: string;
     width?: number | null;
   } | null;
-  titles?:
-    | ({
-        __typename?: "ComponentComponentsTitle";
-        id: string;
-        label?: string | null;
-        link?: string | null;
-        isButton?: boolean | null;
-        isExternal?: boolean | null;
-        subTitles?:
-          | ({
-              __typename?: "ComponentComponentsLink";
-              id: string;
-              label?: string | null;
-              link?: string | null;
-              isExternal?: boolean | null;
-            } | null)[]
-          | null;
-      } | null)[]
-    | null;
+  titles?: ({
+    __typename?: "ComponentComponentsTitle";
+    id: string;
+    label?: string | null;
+    link?: string | null;
+    isButton?: boolean | null;
+    isExternal?: boolean | null;
+    isLang?: boolean | null;
+    subTitles?: ({
+      __typename?: "ComponentComponentsLink";
+      id: string;
+      label?: string | null;
+      link?: string | null;
+      isExternal?: boolean | null;
+    } | null)[] | null;
+  } | null)[] | null;
 };
 
 export type FooterFragmentFragment = {
@@ -1452,15 +1454,13 @@ export type FooterFragmentFragment = {
     url: string;
     width?: number | null;
   } | null;
-  links?:
-    | ({
-        __typename?: "ComponentComponentsLink";
-        id: string;
-        label?: string | null;
-        link?: string | null;
-        isExternal?: boolean | null;
-      } | null)[]
-    | null;
+  links?: ({
+    __typename?: "ComponentComponentsLink";
+    id: string;
+    label?: string | null;
+    link?: string | null;
+    isExternal?: boolean | null;
+  } | null)[] | null;
 };
 
 export type ImageFragmentFragment = {
@@ -1510,7 +1510,9 @@ export type DynamicZoneContentFragment =
   | DynamicZoneContent_ComponentPagesMap_Fragment
   | DynamicZoneContent_Error_Fragment;
 
-export type GetHeaderFooterQueryVariables = Exact<{ [key: string]: never }>;
+export type GetHeaderFooterQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
+}>;
 
 export type GetHeaderFooterQuery = {
   __typename?: "Query";
@@ -1540,25 +1542,22 @@ export type GetHeaderFooterQuery = {
         url: string;
         width?: number | null;
       } | null;
-      titles?:
-        | ({
-            __typename?: "ComponentComponentsTitle";
-            id: string;
-            label?: string | null;
-            link?: string | null;
-            isButton?: boolean | null;
-            isExternal?: boolean | null;
-            subTitles?:
-              | ({
-                  __typename?: "ComponentComponentsLink";
-                  id: string;
-                  label?: string | null;
-                  link?: string | null;
-                  isExternal?: boolean | null;
-                } | null)[]
-              | null;
-          } | null)[]
-        | null;
+      titles?: ({
+        __typename?: "ComponentComponentsTitle";
+        id: string;
+        label?: string | null;
+        link?: string | null;
+        isButton?: boolean | null;
+        isExternal?: boolean | null;
+        isLang?: boolean | null;
+        subTitles?: ({
+          __typename?: "ComponentComponentsLink";
+          id: string;
+          label?: string | null;
+          link?: string | null;
+          isExternal?: boolean | null;
+        } | null)[] | null;
+      } | null)[] | null;
     } | null;
     footer?: {
       __typename?: "ComponentComponentsFooter";
@@ -1581,15 +1580,13 @@ export type GetHeaderFooterQuery = {
         url: string;
         width?: number | null;
       } | null;
-      links?:
-        | ({
-            __typename?: "ComponentComponentsLink";
-            id: string;
-            label?: string | null;
-            link?: string | null;
-            isExternal?: boolean | null;
-          } | null)[]
-        | null;
+      links?: ({
+        __typename?: "ComponentComponentsLink";
+        id: string;
+        label?: string | null;
+        link?: string | null;
+        isExternal?: boolean | null;
+      } | null)[] | null;
     } | null;
   } | null;
 };
@@ -1610,27 +1607,21 @@ export type GetPagesQuery = {
       title?: string | null;
       description?: string | null;
       slug?: string | null;
-      metaTags?:
-        | ({
-            __typename?: "ComponentComponentsMetaTag";
-            id: string;
-            name?: string | null;
-            content?: string | null;
-          } | null)[]
-        | null;
+      metaTags?: ({
+        __typename?: "ComponentComponentsMetaTag";
+        id: string;
+        name?: string | null;
+        content?: string | null;
+      } | null)[] | null;
     } | null;
-    content?:
-      | (
-          | {
-              __typename: "ComponentPagesMap";
-              id: string;
-              title?: string | null;
-              description?: string | null;
-            }
-          | { __typename: "Error"; code: string; message?: string | null }
-          | null
-        )[]
-      | null;
+    content?: (| {
+          __typename: "ComponentPagesMap";
+          id: string;
+          title?: string | null;
+          description?: string | null;
+        }
+      | { __typename: "Error"; code: string; message?: string | null }
+      | null)[] | null;
   } | null)[];
 };
 
@@ -1666,6 +1657,7 @@ export const TitleFragmentFragmentDoc = gql`
     link
     isButton
     isExternal
+    isLang
     subTitles {
       ...LinkFragment
     }
@@ -1723,8 +1715,8 @@ export const DynamicZoneContentFragmentDoc = gql`
   ${ErrorSectionFragmentDoc}
 `;
 export const GetHeaderFooterDocument = gql`
-  query GetHeaderFooter {
-    headerFooter {
+  query GetHeaderFooter($locale: I18NLocaleCode) {
+    headerFooter(locale: $locale) {
       documentId
       header {
         ...HeaderFragment
@@ -1754,6 +1746,7 @@ export const GetHeaderFooterDocument = gql`
  * @example
  * const { data, loading, error } = useGetHeaderFooterQuery({
  *   variables: {
+ *      locale: // value for 'locale'
  *   },
  * });
  */
