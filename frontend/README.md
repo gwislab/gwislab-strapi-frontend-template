@@ -38,3 +38,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 yarn add @apollo/client graphql formik tailwind-merge clsx axios react-hot-toast react-icons
 
 yarn add --dev @graphql-codegen/cli @graphql-codegen/client-preset @graphql-codegen/introspection @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @typescript-eslint/eslint-plugin @typescript-eslint/parser autoprefixer babel-plugin-module-resolver eslint eslint-config-next eslint-config-prettier eslint-plugin-import eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-native husky lint-staged prettier ts-node tslint tslint-config-prettier tslint-react @types/axios
+
+import React from "react";
+
+import SectionContainer from "~/components/section-container";
+
+const TestimonialSection = () => {
+return <SectionContainer loading={false}>TestimonialSection</SectionContainer>;
+};
+
+export default TestimonialSection;

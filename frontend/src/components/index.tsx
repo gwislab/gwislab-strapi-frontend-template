@@ -7,3 +7,4 @@ export { default as AppButton } from "./button";
 export { default as ErrorContent } from "./error-content";
 export { default as SectionContainer } from "./section-container";
 export * from "./svgs";
+export { default as TestimonialItem } from "./testimonial-item";
