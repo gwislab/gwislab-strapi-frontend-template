@@ -33,7 +33,7 @@ const WhyUsSection = () => {
         </div>
         <div className="bg-[#F4F4F4] pb-32">
           <div className="container px-10 mx-auto">
-            <div className="mx-auto">
+            <div className="mx-auto mt-10">
               <Text text="why choose us" className="text-center text-sm text-primary" />
               <Text
                 text="Discover What Sets Us Apart"

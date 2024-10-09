@@ -2,6 +2,7 @@ import React from "react";
 
 import AboutUsSection from "./about";
 import ClientsLogoSection from "./clients-logo";
+import NumbersSection from "./numbers";
 import TestimonialsSection from "./testimonials";
 import WhyUsSection from "./why-us";
 import {
@@ -64,6 +65,7 @@ const HeroSection = () => {
       <WhyUsSection />
       <ClientsLogoSection />
       <TestimonialsSection />
+      <NumbersSection />
     </SectionContainer>
   );
 };
