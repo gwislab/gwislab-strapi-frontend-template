@@ -23,7 +23,8 @@
       "pluginOptions": {},
       "type": "dynamiczone",
       "components": [
-        "pages.map"
+        "pages.map",
+        "pages.hero"
       ]
     }
   }

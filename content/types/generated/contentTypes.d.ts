@@ -601,7 +601,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
   attributes: {
     metaData: Schema.Attribute.Component<'components.meta-data', false>;
-    content: Schema.Attribute.DynamicZone<['pages.map']>;
+    content: Schema.Attribute.DynamicZone<['pages.map', 'pages.hero']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

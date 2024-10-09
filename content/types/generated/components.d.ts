@@ -12,6 +12,18 @@ export interface PagesMap extends Struct.ComponentSchema {
   };
 }
 
+export interface PagesHero extends Struct.ComponentSchema {
+  collectionName: 'components_pages_heroes';
+  info: {
+    displayName: 'Hero';
+    description: '';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    description: Schema.Attribute.String;
+  };
+}
+
 export interface ComponentsTitle extends Struct.ComponentSchema {
   collectionName: 'components_components_title';
   info: {
@@ -97,6 +109,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'pages.map': PagesMap;
+      'pages.hero': PagesHero;
       'components.title': ComponentsTitle;
       'components.meta-tag': ComponentsMetaTag;
       'components.meta-data': ComponentsMetaData;
