@@ -227,6 +227,13 @@ export type ComponentComponentsTitleInput = {
   subTitles?: InputMaybe<InputMaybe<ComponentComponentsLinkInput>[]>;
 };
 
+export type ComponentPagesHero = {
+  __typename?: "ComponentPagesHero";
+  description?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["ID"]["output"];
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
 export type ComponentPagesMap = {
   __typename?: "ComponentPagesMap";
   description?: Maybe<Scalars["String"]["output"]>;
@@ -308,8 +315,10 @@ export type GenericMorph =
   | ComponentComponentsMetaData
   | ComponentComponentsMetaTag
   | ComponentComponentsTitle
+  | ComponentPagesHero
   | ComponentPagesMap
   | HeaderFooter
+  | Hero
   | I18NLocale
   | Page
   | ReviewWorkflowsWorkflow
@@ -341,6 +350,42 @@ export type HeaderFooterInput = {
 export type HeaderFooterRelationResponseCollection = {
   __typename?: "HeaderFooterRelationResponseCollection";
   nodes: HeaderFooter[];
+};
+
+export type Hero = {
+  __typename?: "Hero";
+  bgImage?: Maybe<UploadFile>;
+  button?: Maybe<Maybe<ComponentComponentsLink>[]>;
+  createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  documentId: Scalars["ID"]["output"];
+  locale?: Maybe<Scalars["String"]["output"]>;
+  localizations: Maybe<Hero>[];
+  localizations_connection?: Maybe<HeroRelationResponseCollection>;
+  logo?: Maybe<UploadFile>;
+  publishedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  title?: Maybe<Scalars["String"]["output"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+};
+
+export type HeroButtonArgs = {
+  filters?: InputMaybe<ComponentComponentsLinkFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<InputMaybe<Scalars["String"]["input"]>[]>;
+};
+
+export type HeroInput = {
+  bgImage?: InputMaybe<Scalars["ID"]["input"]>;
+  button?: InputMaybe<InputMaybe<ComponentComponentsLinkInput>[]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  logo?: InputMaybe<Scalars["ID"]["input"]>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]["input"]>;
+  title?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type HeroRelationResponseCollection = {
+  __typename?: "HeroRelationResponseCollection";
+  nodes: Hero[];
 };
 
 export type I18NLocale = {
@@ -480,6 +525,7 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteHeaderFooter?: Maybe<DeleteMutationResponse>;
+  deleteHero?: Maybe<DeleteMutationResponse>;
   deletePage?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
@@ -498,6 +544,7 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateHeaderFooter?: Maybe<HeaderFooter>;
+  updateHero?: Maybe<Hero>;
   updatePage?: Maybe<Page>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
@@ -538,6 +585,10 @@ export type MutationCreateUsersPermissionsUserArgs = {
 };
 
 export type MutationDeleteHeaderFooterArgs = {
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
+};
+
+export type MutationDeleteHeroArgs = {
   locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
 };
 
@@ -589,6 +640,12 @@ export type MutationResetPasswordArgs = {
 
 export type MutationUpdateHeaderFooterArgs = {
   data: HeaderFooterInput;
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type MutationUpdateHeroArgs = {
+  data: HeroInput;
   locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
@@ -651,7 +708,10 @@ export type PageLocalizations_ConnectionArgs = {
   sort?: InputMaybe<InputMaybe<Scalars["String"]["input"]>[]>;
 };
 
-export type PageContentDynamicZone = ComponentPagesMap | Error;
+export type PageContentDynamicZone =
+  | ComponentPagesHero
+  | ComponentPagesMap
+  | Error;
 
 export type PageEntityResponseCollection = {
   __typename?: "PageEntityResponseCollection";
@@ -707,6 +767,7 @@ export enum PublicationStatus {
 export type Query = {
   __typename?: "Query";
   headerFooter?: Maybe<HeaderFooter>;
+  hero?: Maybe<Hero>;
   i18NLocale?: Maybe<I18NLocale>;
   i18NLocales: Maybe<I18NLocale>[];
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
@@ -732,6 +793,11 @@ export type Query = {
 };
 
 export type QueryHeaderFooterArgs = {
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+export type QueryHeroArgs = {
   locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
   status?: InputMaybe<PublicationStatus>;
 };
@@ -1501,10 +1567,24 @@ export type MapSectionFragment = {
   description?: string | null;
 };
 
+export type HeroSectionFragment = {
+  __typename?: "ComponentPagesHero";
+  id: string;
+  title?: string | null;
+  description?: string | null;
+};
+
 export type ErrorSectionFragment = {
   __typename?: "Error";
   code: string;
   message?: string | null;
+};
+
+type DynamicZoneContent_ComponentPagesHero_Fragment = {
+  __typename: "ComponentPagesHero";
+  id: string;
+  title?: string | null;
+  description?: string | null;
 };
 
 type DynamicZoneContent_ComponentPagesMap_Fragment = {
@@ -1521,6 +1601,7 @@ type DynamicZoneContent_Error_Fragment = {
 };
 
 export type DynamicZoneContentFragment =
+  | DynamicZoneContent_ComponentPagesHero_Fragment
   | DynamicZoneContent_ComponentPagesMap_Fragment
   | DynamicZoneContent_Error_Fragment;
 
@@ -1610,6 +1691,65 @@ export type GetHeaderFooterQuery = {
   } | null;
 };
 
+export type GetHeroQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars["I18NLocaleCode"]["input"]>;
+}>;
+
+export type GetHeroQuery = {
+  __typename?: "Query";
+  hero?: {
+    __typename?: "Hero";
+    documentId: string;
+    title?: string | null;
+    description?: string | null;
+    createdAt?: any | null;
+    updatedAt?: any | null;
+    publishedAt?: any | null;
+    locale?: string | null;
+    logo?: {
+      __typename?: "UploadFile";
+      alternativeText?: string | null;
+      caption?: string | null;
+      documentId: string;
+      ext?: string | null;
+      height?: number | null;
+      locale?: string | null;
+      mime: string;
+      name: string;
+      previewUrl?: string | null;
+      provider: string;
+      size: number;
+      url: string;
+      width?: number | null;
+    } | null;
+    button?: ({
+      __typename?: "ComponentComponentsLink";
+      id: string;
+      label?: string | null;
+      link?: string | null;
+      isButton?: boolean | null;
+      isExternal?: boolean | null;
+      isPrimary?: boolean | null;
+    } | null)[] | null;
+    bgImage?: {
+      __typename?: "UploadFile";
+      alternativeText?: string | null;
+      caption?: string | null;
+      documentId: string;
+      ext?: string | null;
+      height?: number | null;
+      locale?: string | null;
+      mime: string;
+      name: string;
+      previewUrl?: string | null;
+      provider: string;
+      size: number;
+      url: string;
+      width?: number | null;
+    } | null;
+  } | null;
+};
+
 export type GetPagesQueryVariables = Exact<{
   slug?: InputMaybe<Scalars["String"]["input"]>;
 }>;
@@ -1634,6 +1774,12 @@ export type GetPagesQuery = {
       } | null)[] | null;
     } | null;
     content?: (| {
+          __typename: "ComponentPagesHero";
+          id: string;
+          title?: string | null;
+          description?: string | null;
+        }
+      | {
           __typename: "ComponentPagesMap";
           id: string;
           title?: string | null;
@@ -1727,14 +1873,23 @@ export const ErrorSectionFragmentDoc = gql`
     message
   }
 `;
+export const HeroSectionFragmentDoc = gql`
+  fragment HeroSection on ComponentPagesHero {
+    id
+    title
+    description
+  }
+`;
 export const DynamicZoneContentFragmentDoc = gql`
   fragment DynamicZoneContent on PageContentDynamicZone {
     __typename
     ...MapSection
     ...ErrorSection
+    ...HeroSection
   }
   ${MapSectionFragmentDoc}
   ${ErrorSectionFragmentDoc}
+  ${HeroSectionFragmentDoc}
 `;
 export const GetHeaderFooterDocument = gql`
   query GetHeaderFooter($locale: I18NLocaleCode) {
@@ -1825,6 +1980,91 @@ export type GetHeaderFooterSuspenseQueryHookResult = ReturnType<
 export type GetHeaderFooterQueryResult = Apollo.QueryResult<
   GetHeaderFooterQuery,
   GetHeaderFooterQueryVariables
+>;
+export const GetHeroDocument = gql`
+  query GetHero($locale: I18NLocaleCode) {
+    hero(locale: $locale) {
+      documentId
+      logo {
+        ...ImageFragment
+      }
+      title
+      description
+      button {
+        ...LinkFragment
+      }
+      bgImage {
+        ...ImageFragment
+      }
+      createdAt
+      updatedAt
+      publishedAt
+      locale
+    }
+  }
+  ${ImageFragmentFragmentDoc}
+  ${LinkFragmentFragmentDoc}
+`;
+
+/**
+ * __useGetHeroQuery__
+ *
+ * To run a query within a React component, call `useGetHeroQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetHeroQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetHeroQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *   },
+ * });
+ */
+export function useGetHeroQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetHeroQuery, GetHeroQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetHeroQuery, GetHeroQueryVariables>(
+    GetHeroDocument,
+    options,
+  );
+}
+export function useGetHeroLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetHeroQuery,
+    GetHeroQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetHeroQuery, GetHeroQueryVariables>(
+    GetHeroDocument,
+    options,
+  );
+}
+export function useGetHeroSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<GetHeroQuery, GetHeroQueryVariables>,
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetHeroQuery, GetHeroQueryVariables>(
+    GetHeroDocument,
+    options,
+  );
+}
+export type GetHeroQueryHookResult = ReturnType<typeof useGetHeroQuery>;
+export type GetHeroLazyQueryHookResult = ReturnType<typeof useGetHeroLazyQuery>;
+export type GetHeroSuspenseQueryHookResult = ReturnType<
+  typeof useGetHeroSuspenseQuery
+>;
+export type GetHeroQueryResult = Apollo.QueryResult<
+  GetHeroQuery,
+  GetHeroQueryVariables
 >;
 export const GetPagesDocument = gql`
   query GetPages($slug: String) {

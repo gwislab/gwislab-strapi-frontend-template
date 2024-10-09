@@ -4,6 +4,12 @@ fragment MapSection on ComponentPagesMap {
   description
 }
 
+fragment HeroSection on ComponentPagesHero {
+  id
+  title
+  description
+}
+
 fragment ErrorSection on Error {
   code
   message
@@ -13,4 +19,5 @@ fragment DynamicZoneContent on PageContentDynamicZone {
   __typename
   ...MapSection
   ...ErrorSection
+  ...HeroSection
 }

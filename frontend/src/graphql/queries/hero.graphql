@@ -1,0 +1,20 @@
+query GetHero($locale: I18NLocaleCode) {
+  hero(locale: $locale) {
+    documentId
+    logo {
+      ...ImageFragment
+    }
+    title
+    description
+    button {
+      ...LinkFragment
+    }
+    bgImage {
+      ...ImageFragment
+    }
+    createdAt
+    updatedAt
+    publishedAt
+    locale
+  }
+}

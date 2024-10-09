@@ -59,8 +59,8 @@ const MenuItem = (item: ComponentComponentsTitle) => {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <span className="flex px-4 pb-1 items-center justify-center gap-2 z-[500000] cursor-pointer">
-            <Text text={item?.label || ""} />
+          <span className="flex px-4 items-center justify-center gap-2 z-[500000] cursor-pointer">
+            <Text text={item?.label || ""} className="pb-1 " />
             <FaCaretDown />
           </span>
         </DropdownMenuTrigger>
@@ -120,8 +120,13 @@ const Header = () => {
       {header ? (
         <div>
           <div className="container mx-auto py-2 px-4 md:px-6 lg:px-8 ">
-            <header>
-              <div className="mr-auto hidden lg:flex gap-2 z-[500000] justify-between">
+            <header className="flex items-center w-full">
+              <div className="lg:hidden mr-6 !w-24 !h-10">
+                <Link href="/">
+                  <AppImage src={extractAssetUrl(header?.logo)} />
+                </Link>
+              </div>
+              <div className="mr-auto hidden lg:flex gap-2 z-[500000] justify-between w-full">
                 <div className="flex h-20 shrink-0 items-center px-4 md:px-6">
                   {header?.titles?.map((title) =>
                     !title?.isLang && !title?.isButton ? (
@@ -139,7 +144,10 @@ const Header = () => {
                     title?.isLang ? (
                       <DropdownMenu key={title?.label}>
                         <DropdownMenuTrigger>
-                          <Text text={locale} />
+                          <div className="flex justify-center items-center gap-1">
+                            <Text text={locale} className="pb-1" />
+                            <FaCaretDown />
+                          </div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                           <DropdownMenuLabel>
@@ -190,7 +198,10 @@ const Header = () => {
                       title?.isLang ? (
                         <DropdownMenu key={title?.label}>
                           <DropdownMenuTrigger>
-                            <Text text={locale} />
+                            <div className="flex justify-center items-center gap-1">
+                              <Text text={locale} className="pb-1" />
+                              <FaCaretDown />
+                            </div>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
                             <DropdownMenuLabel>
