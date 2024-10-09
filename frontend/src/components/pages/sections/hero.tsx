@@ -3,6 +3,7 @@ import React from "react";
 import AboutUsSection from "./about";
 import BlogSection from "./blog";
 import ClientsLogoSection from "./clients-logo";
+import GetInTouchSection from "./get-in-touch";
 import NumbersSection from "./numbers";
 import TestimonialsSection from "./testimonials";
 import WhyUsSection from "./why-us";
@@ -68,6 +69,7 @@ const HeroSection = () => {
       <TestimonialsSection />
       <NumbersSection />
       <BlogSection />
+      <GetInTouchSection />
     </SectionContainer>
   );
 };
