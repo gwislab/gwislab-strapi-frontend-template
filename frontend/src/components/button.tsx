@@ -15,6 +15,7 @@ interface ButtonProps extends Partial<LinkFragmentFragment> {
   textClassName?: string;
   link?: string | Maybe<string>;
   leftIcon?: any;
+  rightIcon?: any;
   showArrow?: boolean;
   loading?: boolean;
   onClick?: () => void;
@@ -29,6 +30,7 @@ const AppButton = ({
   showArrow,
   loading,
   link,
+  rightIcon,
   isExternal,
   ...props
 }: ButtonProps) => {
@@ -61,6 +63,8 @@ const AppButton = ({
       ) : (
         <Text text={text!} className={cn("text-sm text-[unset]", textClassName)} />
       )}
+      {rightIcon}
+
       {showArrow ? (
         <svg
           width="11"
