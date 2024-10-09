@@ -4,6 +4,7 @@ import AboutUsSection from "./about";
 import BlogSection from "./blog";
 import ClientsLogoSection from "./clients-logo";
 import GetInTouchSection from "./get-in-touch";
+import NewsLetterSection from "./newsletter";
 import NumbersSection from "./numbers";
 import TestimonialsSection from "./testimonials";
 import WhyUsSection from "./why-us";
@@ -70,6 +71,7 @@ const HeroSection = () => {
       <NumbersSection />
       <BlogSection />
       <GetInTouchSection />
+      <NewsLetterSection />
     </SectionContainer>
   );
 };

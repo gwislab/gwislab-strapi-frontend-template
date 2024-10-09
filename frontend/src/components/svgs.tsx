@@ -43,7 +43,7 @@ export const Triangle = () => (
   <div
     className="w-0 h-0"
     style={{
-      borderTop: "430px solid transparent",
+      borderTop: "470px solid transparent",
       borderRight: "2000px solid #F4F4F4"
     }}
   />
