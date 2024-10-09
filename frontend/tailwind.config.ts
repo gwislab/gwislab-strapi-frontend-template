@@ -29,6 +29,14 @@ const config: Config = {
           DEFAULT: "#00427F",
           foreground: "hsl(var(--primary-foreground))"
         },
+        text: {
+          DEFAULT: "#7E7E7EAF",
+          foreground: "hsl(var(--primary-foreground))"
+        },
+        title: {
+          DEFAULT: "#292D33",
+          foreground: "hsl(var(--primary-foreground))"
+        },
         secondary: {
           DEFAULT: "#00427F",
           foreground: "hsl(var(--secondary-foreground))"

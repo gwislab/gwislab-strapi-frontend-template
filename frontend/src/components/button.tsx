@@ -39,8 +39,8 @@ const AppButton = ({
         "border h-10 border-white flex justify-center hover:bg-black items-center gap-2",
         className,
         props.isPrimary
-          ? "bg-primary text-white"
-          : "bg-white text-primary border-primary hover:bg-primary hover:text-white"
+          ? "bg-primary !text-white"
+          : "bg-white !text-primary border-primary hover:bg-primary hover:!text-white"
       )}
       onClick={
         onClick
@@ -59,7 +59,7 @@ const AppButton = ({
           <div className="w-4 h-4 border-2 border-gray-300 border-t-primary rounded-full animate-spin" />
         </div>
       ) : (
-        <Text text={text!} className={cn("text-sm", textClassName)} />
+        <Text text={text!} className={cn("text-sm text-[unset]", textClassName)} />
       )}
       {showArrow ? (
         <svg

@@ -13,9 +13,11 @@ const Text = ({ text, isHeading, className }: ITextProps) => {
   if (!text) return <></>;
 
   if (isHeading) {
-    return <h2 className={cn("font-title text-xl", className)}>{text}</h2>;
+    return <h2 className={cn("font-title text-xl text-title", className)}>{text}</h2>;
   }
-  return <p className={cn("font-text text-base", className)}>{text}</p>;
+  return (
+    <p className={cn("font-text text-base text-text font-light", className)}>{text}</p>
+  );
 };
 
 export default Text;

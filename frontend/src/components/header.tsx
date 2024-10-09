@@ -60,7 +60,7 @@ const MenuItem = (item: ComponentComponentsTitle) => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <span className="flex px-4 items-center justify-center gap-2 z-[500000] cursor-pointer">
-            <Text text={item?.label || ""} className="pb-1 " />
+            <Text text={item?.label || ""} className="pb-1 text-title" />
             <FaCaretDown />
           </span>
         </DropdownMenuTrigger>
@@ -78,7 +78,7 @@ const MenuItem = (item: ComponentComponentsTitle) => {
            group inline-flex h-9 gap-2 items-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:underline focus:outline-none`}
                   href={getLink({ link: `${subItem?.link || ""}` })}
                 >
-                  <Text text={subItem?.label || ""} />
+                  <Text text={subItem?.label || ""} className="text-title" />
                 </Link>
               ) : (
                 <AppButton
@@ -106,7 +106,7 @@ const MenuItem = (item: ComponentComponentsTitle) => {
 group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:underline focus:outline-none`}
       href={getLink({ link: `${item?.link || ""}` })}
     >
-      <Text text={item?.label || ""} />
+      <Text text={item?.label || ""} className="text-title" />
     </Link>
   );
 };
@@ -199,20 +199,20 @@ const Header = () => {
                         <DropdownMenu key={title?.label}>
                           <DropdownMenuTrigger>
                             <div className="flex justify-center items-center gap-1">
-                              <Text text={locale} className="pb-1" />
+                              <Text text={locale} className="pb-1 text-title" />
                               <FaCaretDown />
                             </div>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
                             <DropdownMenuLabel>
-                              <Text text={title?.label} />
+                              <Text text={title?.label} className="text-title" />
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem onClick={() => appRouter({ locale: "en" })}>
-                              <Text text="EN" />
+                              <Text text="EN" className="text-title" />
                             </DropdownMenuItem>
                             <DropdownMenuItem onClick={() => appRouter({ locale: "fr" })}>
-                              <Text text="FR" />
+                              <Text text="FR" className="text-title" />
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -224,7 +224,6 @@ const Header = () => {
                       ) : (
                         <AppButton
                           key={title?.label}
-                          className="h-10"
                           text={title?.label}
                           link={title?.link}
                           isPrimary={title?.isPrimary}
