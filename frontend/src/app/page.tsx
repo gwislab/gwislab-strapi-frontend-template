@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 const Home = async () => {
-  const result = await getPageComponents();
+  const result = await getPageComponents("/");
 
   return (
     <main>
