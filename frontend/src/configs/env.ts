@@ -9,7 +9,7 @@ const getDomainUrl = () => {
 };
 
 export const APP_ENV = {
-  APP_NAME: "Nordic PPM Group",
+  APP_NAME: "Gwislab Template",
   APP_DEFAULT_DESCRIPTION: "Transforming Project Concepts into Opportunities",
   DEFAULT_THEME: "light",
   BACKEND_BASE: getDomainUrl(),

@@ -3,7 +3,6 @@
 import React from "react";
 
 import ErrorContent from "../error-content";
-import HeroSection from "./sections/hero";
 import MapSection from "./sections/map";
 import { DynamicZoneContentFragment } from "~/graphql/generated/schema";
 
@@ -15,9 +14,6 @@ const RenderRightSectionFromContent = ({
   content
 }: IRenderRightSectionFromContentProps) => {
   switch (content.__typename) {
-    case "ComponentPagesHero":
-      return <HeroSection />;
-
     case "ComponentPagesMap":
       return <MapSection />;
 
